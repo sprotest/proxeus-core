@@ -5,8 +5,7 @@ import (
 	"time"
 )
 
-/*
-*
+/**
 The actual version of the User struct.
 If the structure changes, increase this value, to upgrade persisted data and implement the upgrade!
 */
@@ -56,7 +55,7 @@ func (me *User) IsGrantedFor(role Role) bool {
 	return role <= me.Role
 }
 
-// ----Auth interface----------------
+//----Auth interface----------------
 func (me *User) UserID() string {
 	return me.ID
 }

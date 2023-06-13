@@ -116,16 +116,13 @@ type ImportExportResult struct {
 // Returns exported entities
 //
 // @params
-//
-//	include string
-//	EntityType  []string
-//
+// 		include string
+//		EntityType  []string
 // @returns
-//
-//		200 => File
-//		400 => Bad Request
-//	 422 => Input error
-//	}
+//	200 => File
+//	400 => Bad Request
+//  422 => Input error
+// }
 func GetExport(e echo.Context) error {
 	c := e.(*www.Context)
 	sess := c.Session(false)
@@ -154,16 +151,13 @@ func GetExport(e echo.Context) error {
 // Imports a file containing exported entities
 //
 // @params
-//
-//	skipExisting string
-//	File File (in body)
-//
+// 		skipExisting string
+//		File File (in body)
 // @returns
-//
-//		200 => OK
-//		400 => Bad Request
-//	 422 => Input error
-//	}
+//	200 => OK
+//	400 => Bad Request
+//  422 => Input error
+// }
 func PostImport(e echo.Context) error {
 	c := e.(*www.Context)
 	sess := c.Session(false)
@@ -186,17 +180,14 @@ func PostImport(e echo.Context) error {
 // Exports user data
 //
 // @params
-//
-//	contains string
-//	id 		 string
-//
+// 		contains string
+// 		id 		 string
 // @returns
-//
-//		200 => File
-//		400 => Bad Request
-//	 401 => StatusUnauthorized
-//	 422 => Input error
-//	}
+//	200 => File
+//	400 => Bad Request
+//  401 => StatusUnauthorized
+//  422 => Input error
+// }
 func ExportUserData(e echo.Context) error {
 	c := e.(*www.Context)
 	sess := c.Session(false)
@@ -221,11 +212,10 @@ func ExportUserData(e echo.Context) error {
 // Export platform settings
 //
 // @returns
-//
-//		200 => File
-//		400 => Bad Request
-//	 422 => Input error
-//	}
+//	200 => File
+//	400 => Bad Request
+//  422 => Input error
+// }
 func ExportSettings(e echo.Context) error {
 	c := e.(*www.Context)
 	sess := c.Session(false)
@@ -238,16 +228,13 @@ func ExportSettings(e echo.Context) error {
 // Export a user record
 //
 // @params
-//
-//	contains string
-//	id 		 string
-//
+// 		contains string
+// 		id 		 string
 // @returns
-//
-//		200 => File
-//		400 => Bad Request
-//	 422 => Input error
-//	}
+//	200 => File
+//	400 => Bad Request
+//  422 => Input error
+// }
 func ExportUser(e echo.Context) error {
 	c := e.(*www.Context)
 	sess := c.Session(false)
@@ -272,11 +259,10 @@ func ExportUser(e echo.Context) error {
 // Helper function for all exports
 //
 // @returns
-//
-//		200 => File
-//		400 => Bad Request
-//	 422 => Input error
-//	}
+//	200 => File
+//	400 => Bad Request
+//  422 => Input error
+// }
 func Export(sess *sys.Session, exportEntities []portable.EntityType, e echo.Context, id ...string) error {
 	c := e.(*www.Context)
 	if len(exportEntities) == 0 {
@@ -305,10 +291,9 @@ func Export(sess *sys.Session, exportEntities []portable.EntityType, e echo.Cont
 //
 // @params
 // @returns
-//
-//		200 => imexResults
-//		401 => StatusUnauthorized
-//	}
+//	200 => imexResults
+//	401 => StatusUnauthorized
+// }
 func GetExportResults(e echo.Context) error {
 	c := e.(*www.Context)
 	sess := c.Session(false)
@@ -321,14 +306,11 @@ func GetExportResults(e echo.Context) error {
 // Returns the last imported records from the user session
 //
 // @params
-//
-//	delete boolean
-//
+//		delete boolean
 // @returns
-//
-//		200 => imex results
-//		401 => Unauthorized
-//	}
+//	200 => imex results
+//	401 => Unauthorized
+// }
 func GetImportResults(e echo.Context) error {
 	c := e.(*www.Context)
 	sess := c.Session(false)
@@ -360,10 +342,9 @@ func results(key string, sess *sys.Session, c echo.Context) error {
 // Returns the platform settings and the "configured" flag that defines whether the user is configured or not
 //
 // @returns
-//
-//		200 => map[string]interface{}{"settings": settings, "configured": configured}
-//		500 => Server error
-//	}
+//	200 => map[string]interface{}{"settings": settings, "configured": configured}
+//	500 => Server error
+// }
 func GetInit(e echo.Context) error {
 	c := e.(*www.Context)
 	configured, err := c.System().Configured()
@@ -381,17 +362,15 @@ var root = &model.User{Role: model.ROOT}
 
 // Initialize the system
 //
-//	@params initStruct => struct {
-//			Settings *model.Settings `json:"settings"`
-//			User     *usr            `json:"user"`
-//		}
-//
-// @returns
-//
-//		200 => OK
-//	 422 => unprocessable entity
-//		500 => Server error
+// @params initStruct => struct {
+//		Settings *model.Settings `json:"settings"`
+//		User     *usr            `json:"user"`
 //	}
+// @returns
+//	200 => OK
+//  422 => unprocessable entity
+//	500 => Server error
+// }
 func PostInit(e echo.Context) error {
 	c := e.(*www.Context)
 	sess := c.Session(false)
@@ -448,13 +427,12 @@ func PostInit(e echo.Context) error {
 }
 
 // Returns an object containing the following config parameters
-//
-//	{
-//	  roles => string[] => Possible User Roles
-//	  blockchainNet => string => Settings.BlockchainNet
-//	  blockchainProxeusFSAddress => string => Settings.BlockchainContractAddress
-//	  version => string => Proxeus version
-//	}
+// {
+//   roles => string[] => Possible User Roles
+//   blockchainNet => string => Settings.BlockchainNet
+//   blockchainProxeusFSAddress => string => Settings.BlockchainContractAddress
+//   version => string => Proxeus version
+// }
 func ConfigHandler(version string) echo.HandlerFunc {
 	return func(e echo.Context) error {
 		c := e.(*www.Context)
@@ -483,21 +461,19 @@ type loginForm struct {
 
 // Update a users' blockchain address
 //
-//	@param loginForm => {
-//		Signature string
-//		Name      string `json:"name" form:"name"`
-//		Email     string `json:"email" form:"email"`
-//		Password  string `json:"password" form:"password"`
-//		Address   string `json:"address" form:"address"`
-//	}
-//
+// @param loginForm => {
+//	Signature string
+//	Name      string `json:"name" form:"name"`
+//	Email     string `json:"email" form:"email"`
+//	Password  string `json:"password" form:"password"`
+//	Address   string `json:"address" form:"address"`
+// }
 // @returns
-//
-//		200 => OK
-//		401 => Unauthorized
-//	 422 => Challenge error/Signature error
-//	 500 => User not found
-//	}
+//	200 => OK
+//	401 => Unauthorized
+//  422 => Challenge error/Signature error
+//  500 => User not found
+// }
 func UpdateAddress(e echo.Context) error {
 	c := e.(*www.Context)
 	loginForm := new(loginForm)
@@ -535,7 +511,7 @@ func UpdateAddress(e echo.Context) error {
 	return c.NoContent(http.StatusOK)
 }
 
-// root only feature to switch user by address - useful for permission checks
+//root only feature to switch user by address - useful for permission checks
 func SwitchUserHandler(e echo.Context) error {
 	c := e.(*www.Context)
 	user, err := userService.GetByBCAddress(e.Param("address"))
@@ -553,22 +529,20 @@ func SwitchUserHandler(e echo.Context) error {
 
 // Create an auth session
 //
-//	@params => {
-//		Signature string
-//		Name      string `json:"name" form:"name"`
-//		Email     string `json:"email" form:"email"`
-//		Password  string `json:"password" form:"password"`
-//		Address   string `json:"address" form:"address"`
-//	}
-//
+// @params => {
+//	Signature string
+//	Name      string `json:"name" form:"name"`
+//	Email     string `json:"email" form:"email"`
+//	Password  string `json:"password" form:"password"`
+//	Address   string `json:"address" form:"address"`
+//}
 // @returns
-//
-//		200 => OK => {
-//			"location": redirectAfterLogin(user.Role, string(referer)),
-//			"created":  created,
-//		}
-//	 400 => Auth error
+//	200 => OK => {
+//		"location": redirectAfterLogin(user.Role, string(referer)),
+//		"created":  created,
 //	}
+//  400 => Auth error
+// }
 func LoginHandler(e echo.Context) (err error) {
 	c := e.(*www.Context)
 	loginForm := new(loginForm)
@@ -633,10 +607,9 @@ func LoginHandler(e echo.Context) (err error) {
 }
 
 // Returns an object containing
-//
-//	{
-//	  token => string => Session ID
-//	}
+// {
+//   token => string => Session ID
+// }
 func GetSessionTokenHandler(e echo.Context) (err error) {
 	c := e.(*www.Context)
 
@@ -682,20 +655,18 @@ func DeleteSessionTokenHandler(e echo.Context) (err error) {
 
 // Invite a user
 //
-//	@params TokenRequest struct {
-//			Email  string    `json:"email" validate:"email=true,required=true"`
-//			Token  string    `json:"token"`
-//			UserID string    `json:"userID"`
-//			Role   Role      `json:"role"`
-//			Type   TokenType `json:"type"`
-//		}
-//
-// @returns
-//
-//		200 => OK
-//	 422 => unprocessable entity
-//		500 => Server error
+// @params TokenRequest struct {
+//		Email  string    `json:"email" validate:"email=true,required=true"`
+//		Token  string    `json:"token"`
+//		UserID string    `json:"userID"`
+//		Role   Role      `json:"role"`
+//		Type   TokenType `json:"type"`
 //	}
+// @returns
+//	200 => OK
+//  422 => unprocessable entity
+//	500 => Server error
+// }
 func InviteRequest(e echo.Context) (err error) {
 	c := e.(*www.Context)
 	sess := c.Session(false)
@@ -741,21 +712,19 @@ func InviteRequest(e echo.Context) (err error) {
 
 // Handles a registration request
 //
-//	@params => {
-//			Email  string    `json:"email" validate:"email=true,required=true"`
-//			Token  string    `json:"token"`
-//			UserID string    `json:"userID"`
-//			Role   Role      `json:"role"`
-//			Type   TokenType `json:"type"`
-//		}
-//
-// @returns
-//
-//		200 => OK
-//	 417 => E-Mail error
-//	 422 => Input validation error
-//	 500 => Data layer error
+// @params => {
+//		Email  string    `json:"email" validate:"email=true,required=true"`
+//		Token  string    `json:"token"`
+//		UserID string    `json:"userID"`
+//		Role   Role      `json:"role"`
+//		Type   TokenType `json:"type"`
 //	}
+// @returns
+//	200 => OK
+//  417 => E-Mail error
+//  422 => Input validation error
+//  500 => Data layer error
+// }
 func RegisterRequest(e echo.Context) (err error) {
 	c := e.(*www.Context)
 	m := &model.TokenRequest{}
@@ -782,17 +751,15 @@ func RegisterRequest(e echo.Context) (err error) {
 
 // Persists a registration request
 //
-//	@params => {
-//		 string => token
-//	  string => password
-//	}
-//
+// @params => {
+//	 string => token
+//   string => password
+// }
 // @returns
-//
-//		200 => OK
-//	 417 => Token not found/User not found/Data Layer error
-//	 422 => Input validation error
-//	}
+//	200 => OK
+//  417 => Token not found/User not found/Data Layer error
+//  422 => Input validation error
+// }
 func Register(e echo.Context) error {
 	c := e.(*www.Context)
 	tokenID := c.Param("token")
@@ -817,22 +784,20 @@ func Register(e echo.Context) error {
 
 // Start a user password change request
 //
-//	@params => {
-//			Email  string    `json:"email" validate:"email=true,required=true"`
-//			Token  string    `json:"token"`
-//			UserID string    `json:"userID"`
-//			Role   Role      `json:"role"`
-//			Type   TokenType `json:"type"`
-//		}
-//
-// @returns
-//
-//		200 => OK
-//		400 => Token request not found
-//	 417 => E-Mail error
-//	 422 => Input validation error
-//	 500 => Token error
+// @params => {
+//		Email  string    `json:"email" validate:"email=true,required=true"`
+//		Token  string    `json:"token"`
+//		UserID string    `json:"userID"`
+//		Role   Role      `json:"role"`
+//		Type   TokenType `json:"type"`
 //	}
+// @returns
+//	200 => OK
+//	400 => Token request not found
+//  417 => E-Mail error
+//  422 => Input validation error
+//  500 => Token error
+// }
 func ResetPasswordRequest(e echo.Context) (err error) {
 	c := e.(*www.Context)
 	m := &model.TokenRequest{}
@@ -861,11 +826,10 @@ func ResetPasswordRequest(e echo.Context) (err error) {
 //
 // @params => string => tokenID
 // @returns
-//
-//		200 => OK
-//	 417 => Data layer error
-//	 422 => Input validation error
-//	}
+//	200 => OK
+//  417 => Data layer error
+//  422 => Input validation error
+// }
 func ResetPassword(e echo.Context) error {
 	c := e.(*www.Context)
 	tokenID := c.Param("token")
@@ -890,22 +854,20 @@ func ResetPassword(e echo.Context) error {
 
 // Start a users email change request
 //
-//	@param tokenRequest => {
-//			Email  string    `json:"email" validate:"email=true,required=true"`
-//			Token  string    `json:"token"`
-//			UserID string    `json:"userID"`
-//			Role   Role      `json:"role"`
-//			Type   TokenType `json:"type"`
-//		}
-//
-// @returns
-//
-//		200 => OK
-//		401 => Unauthorized
-//	 417 => E-Mail error
-//	 422 => Input error
-//	 500 => Token error
+// @param tokenRequest => {
+//		Email  string    `json:"email" validate:"email=true,required=true"`
+//		Token  string    `json:"token"`
+//		UserID string    `json:"userID"`
+//		Role   Role      `json:"role"`
+//		Type   TokenType `json:"type"`
 //	}
+// @returns
+//	200 => OK
+//	401 => Unauthorized
+//  417 => E-Mail error
+//  422 => Input error
+//  500 => Token error
+// }
 func ChangeEmailRequest(e echo.Context) (err error) {
 	c := e.(*www.Context)
 	m := &model.TokenRequest{}
@@ -954,11 +916,10 @@ func ChangeEmailRequest(e echo.Context) (err error) {
 //
 // @param tokenID => string => Request token
 // @returns
-//
-//		200 => OK
-//		400 => Token request not found
-//	 417 => Data layer error
-//	}
+//	200 => OK
+//	400 => Token request not found
+//  417 => Data layer error
+// }
 func ChangeEmail(e echo.Context) error {
 	c := e.(*www.Context)
 	tokenID := c.Param("token")
@@ -980,7 +941,6 @@ func ChangeEmail(e echo.Context) error {
 //
 // @params => nil
 // @returns
-//
 //	200 => OK => {
 //		"location": "/"
 //	}
@@ -1026,10 +986,9 @@ func ChallengeHandler(e echo.Context) error {
 //
 // @params => -
 // @returns
-//
-//		200 => User => {}
-//	 404 => Not found
-//	}
+//	200 => User => {}
+//  404 => Not found
+// }
 func MeHandler(e echo.Context) error {
 	c := e.(*www.Context)
 	sess := c.Session(false)
@@ -1052,9 +1011,8 @@ type UserWithPw struct {
 //
 // @params => -
 // @returns
-//
-//		200 => User => {}
-//	 404 => Not found
+//	200 => User => {}
+//  404 => Not found
 func MeUpdateHandler(e echo.Context) error {
 	c := e.(*www.Context)
 	sess := c.Session(false)
@@ -1095,9 +1053,8 @@ func MeUpdateHandler(e echo.Context) error {
 //
 // @params => -
 // @returns
-//
-//		200 => User => {}
-//	 404 => Not found
+//	200 => User => {}
+//  404 => Not found
 func PutProfilePhotoHandler(e echo.Context) error {
 	c := e.(*www.Context)
 	sess := c.Session(false)
@@ -1116,10 +1073,9 @@ func PutProfilePhotoHandler(e echo.Context) error {
 //
 // @params id => string
 // @returns
-//
-//		200 => File
-//	 404 => Not found
-//	}
+//	200 => File
+//  404 => Not found
+// }
 func GetProfilePhotoHandler(e echo.Context) error {
 	c := e.(*www.Context)
 	sess := c.Session(false)
@@ -1172,12 +1128,11 @@ var errNoPaymentFound = errors.New("no payment for workflow")
 //
 // @params ID => string
 // @returns
-//
-//		200 => map[string]interface{}{"name" => string, "status" => string}
-//	 400 => Bad request
-//	 404 => Not found
-//	 422 => Unprocessable entity
-//	 500 => Server error
+//	200 => map[string]interface{}{"name" => string, "status" => string}
+//  400 => Bad request
+//  404 => Not found
+//  422 => Unprocessable entity
+//  500 => Server error
 func DocumentHandler(e echo.Context) error {
 	c := e.(*www.Context)
 	ID := c.Param("ID")
@@ -1257,9 +1212,8 @@ func DocumentHandler(e echo.Context) error {
 //
 // @params ID => string
 // @returns
-//
-//		200 => OK
-//	 400 => Bad request
+//	200 => OK
+//  400 => Bad request
 func DocumentDeleteHandler(e echo.Context) error {
 	c := e.(*www.Context)
 	ID := c.Param("ID")
@@ -1280,10 +1234,9 @@ func DocumentDeleteHandler(e echo.Context) error {
 //
 // @params ID => string, FormInput => interface{}
 // @returns
-//
-//		200 => OK
-//	 400 => Bad request
-//	 422 => Unprocessable entity
+//	200 => OK
+//  400 => Bad request
+//  422 => Unprocessable entity
 func DocumentEditHandler(e echo.Context) error {
 	c := e.(*www.Context)
 	ID := c.Param("ID")
@@ -1327,16 +1280,13 @@ func getUserFromSession(s *sys.Session) (user *model.User) {
 // Move one step further in the document process
 //
 // @params 	ID => string
-//
-//	final => boolean,
-//	FormInput => map[string]interface{}
-//
+//			final => boolean,
+//			FormInput => map[string]interface{}
 // @returns
-//
-//		200 => map[string]interface{}
-//	 400 => Bad request
-//	 401 => Unauthorized
-//	 422 => Unprocessable entity
+//	200 => map[string]interface{}
+//  400 => Bad request
+//  401 => Unauthorized
+//  422 => Unprocessable entity
 func DocumentNextHandler(e echo.Context) error {
 	c := e.(*www.Context)
 	ID := c.Param("ID")
@@ -1382,9 +1332,8 @@ func DocumentNextHandler(e echo.Context) error {
 //
 // @params 	ID => string
 // @returns
-//
-//		200 => status => string
-//	 400 => Bad request
+//	200 => status => string
+//  400 => Bad request
 func DocumentPrevHandler(e echo.Context) error {
 	c := e.(*www.Context)
 	ID := c.Param("ID")
@@ -1411,15 +1360,12 @@ func DocumentPrevHandler(e echo.Context) error {
 // Update a document with data
 //
 // @params 	ID => string
-//
-//	FormInput => map[string]interface{}
-//
+//			FormInput => map[string]interface{}
 // @returns
-//
-//		200 => OK
-//	 400 => Bad request
-//	 422 => Unprocessable entity
-//	 500 => Server error
+//	200 => OK
+//  400 => Bad request
+//  422 => Unprocessable entity
+//  500 => Server error
 func DocumentDataHandler(e echo.Context) error {
 	c := e.(*www.Context)
 	ID := c.Param("ID")
@@ -1451,13 +1397,10 @@ func DocumentDataHandler(e echo.Context) error {
 // Returns a document's file output
 //
 // @params 	ID => string
-//
-//	inputName => string
-//
+//			inputName => string
 // @returns
-//
-//		200 => map[string]interface{}
-//	 404 => Not found
+//	200 => map[string]interface{}
+//  404 => Not found
 func DocumentFileGetHandler(e echo.Context) error {
 	c := e.(*www.Context)
 	sess := c.Session(false)
@@ -1486,9 +1429,8 @@ func DocumentFileGetHandler(e echo.Context) error {
 // Attach a file to a document
 //
 // @params 	@Fileinput
-//
-//	ID => string
-//	inputName => string
+//			ID => string
+//			inputName => string
 func DocumentFilePostHandler(e echo.Context) error {
 	c := e.(*www.Context)
 	fieldname := c.Param("inputName")
@@ -1925,16 +1867,14 @@ func WorkflowExecuteAtOnce(e echo.Context) error {
 
 // Remove the users' auth session
 //
-//	@params => {
-//	  name => string,
-//	  ID => string,
-//	}
-//
+// @params => {
+//   name => string,
+//   ID => string,
+// }
 // @returns
-//
-//		200 => apiKey string
-//	 400 => Data layer error/Validation error
-//	 401 => Unauthorized
+//	200 => apiKey string
+//  400 => Data layer error/Validation error
+//  401 => Unauthorized
 func CreateApiKeyHandler(e echo.Context) error {
 	c := e.(*www.Context)
 	sess := c.Session(false)
@@ -1958,15 +1898,13 @@ func CreateApiKeyHandler(e echo.Context) error {
 
 // Remove the users' auth session
 //
-//	@params => {
-//	  ID => string,
-//	}
-//
+// @params => {
+//   ID => string,
+// }
 // @returns
-//
-//		200 => apiKey string
-//	 400 => Data layer error
-//	 401 => Unauthorized
+//	200 => apiKey string
+//  400 => Data layer error
+//  401 => Unauthorized
 func DeleteApiKeyHandler(e echo.Context) error {
 	c := e.(*www.Context)
 	sess := c.Session(false)
@@ -2007,14 +1945,13 @@ func ExternalConfigurationPage(e echo.Context) error {
 }
 
 // Register an external node
-//
-//	@param node => {
-//			ID     string `json:"id" storm:"id"`
-//			Name   string `json:"name"`
-//			Detail string `json:"detail"`
-//			Url    string `json:"url"`
-//			Secret string `json:"secret"`
-//		}
+// @param node => {
+//		ID     string `json:"id" storm:"id"`
+//		Name   string `json:"name"`
+//		Detail string `json:"detail"`
+//		Url    string `json:"url"`
+//		Secret string `json:"secret"`
+//	}
 func ExternalRegister(e echo.Context) error {
 	c := e.(*www.Context)
 	var node externalnode.ExternalNode
