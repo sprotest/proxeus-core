@@ -117,6 +117,8 @@ Usage of ./artifacts/proxeus:
     	Ethereum websocket URL (PROXEUS_ETH_WEB_SOCKET_URL) (default "wss://sepolia.infura.io/ws/v3/")
   -InfuraApiKey string
     	API Key to access Infura node. (PROXEUS_INFURA_API_KEY)
+  -InfuraApiKeyClientSide string optional
+    	API Key to access Infura node on client side (used for document verifications for users who has no installed metamask, if it is not set - the public RPC endpoint will be used to check document). Please set the origins in the Infura settings to restict access to RPC enpoint only from trusted domains (PROXEUS_INFURA_API_KEY_CLIENT_SIDE)
   -LogPath string
     	Location of the log file of this service. (PROXEUS_LOG_PATH) (default "./log")
   -PlatformDomain string

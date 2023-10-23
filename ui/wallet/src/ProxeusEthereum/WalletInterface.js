@@ -31,7 +31,9 @@ class WalletInterface {
       // connect to the network using what was given in the constructor
       this.web3.setProvider(
         new this.web3.providers.HttpProvider(
-          'https://' + network + '.infura.io/'))
+          // todo: if the PROXEUS_INFURA_API_KEY_CLIENT_SIDE exist
+          // use endpoint     https:// + network + .infura.io/v3/ + PROXEUS_INFURA_API_KEY_CLIENT_SIDE, otherwise use public endpoint
+          'https://' + network + '.rpc.thirdweb.com/'))
     } else {
       if (window.ethereum) {
         this.web3.setProvider(window.ethereum)

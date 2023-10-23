@@ -423,12 +423,14 @@ export default {
     this.loadMe()
 
     // when accounts loaded register accountsChanged handler and reload page if user changes the account
-    window.ethereum.on('accountsChanged', function () {
-      window.location.reload()
-    })
-    window.ethereum.on('chainChanged', function (e) {
-      console.log('Chain changed')
-      window.location.reload()
-    })
+    if (window.ethereum) {
+      window.ethereum.on('accountsChanged', function () {
+        window.location.reload()
+      })
+      window.ethereum.on('chainChanged', function (e) {
+        console.log('Chain changed')
+        window.location.reload()
+      })
+    }
   }
 }

@@ -44,6 +44,7 @@ Add these to a `.env` file in the same folder as `docker-compose.yml`:
 |PROXEUS_ENCRYPTION_SECRET_KEY|*A random string of 32 characters*|Use a hard key to ensure your database is safe.|
 |PROXEUS_BLOCKCHAIN_CONTRACT_ADDRESS|*0x1d3e5c81bf4bc60d41a8fbbb3d1bae6f03a75f71*|The address of the Proxeus contract.|
 |PROXEUS_INFURA_API_KEY|*Your Infura API Key*|An Infura API Key for Ethereum integration.|
+|PROXEUS_INFURA_API_KEY_CLIENT_SIDE|*Your Infura API Key*|An Infura API Key for document verification on client side.|
 |PROXEUS_SPARKPOST_API_KEY|*Your SpartPost Key*|A SparkPost API Key for email integration.|
 |PROXEUS_EMAIL_FROM|`no-reply@example.com`|The email address used as sender when Proxeus sends an email.|
 |PROXEUS_PLATFORM_DOMAIN:|`http://xes-platform:1323`|The domain of the running platform.  Mainly used for display|
